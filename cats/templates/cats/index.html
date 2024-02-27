@@ -1,0 +1,40 @@
+<ul>
+    {% for cat in cats %}
+        <li>
+            <a href="{% url 'cat' cat.id %}">{{ cat.name }}</a>
+            <p>{{ cat.breed }}</p>
+        </li>
+    {% endfor %}
+</ul>
+
+<form method="post" action="{% url 'add_cat' %}">
+    {% csrf_token %}
+    <fieldset>
+        <legend>Add Cat</legend>
+        <label for="">
+            Name
+            <input type="text" name="name" placeholder="Cat Name" required>
+        </label>
+        <label for="">
+            Breed
+            <select id="breed" name="breed">
+                {% for breed in breeds %}
+                    <option value="{{ breed.id }}">{{ breed.name }}</option>
+                {% endfor %}
+            </select>
+        </label>
+        <label for="">
+            Age
+            <input type="number" name="age" placeholder="Cat Age" required>
+        </label>
+        <label for="">
+            Weight
+            <input type="number" name="weight" placeholder="Cat Weight" required>
+        </label>
+        <label for="">
+            Description
+            <textarea name="description" placeholder="Cat Description" required></textarea>
+        </label>
+        <button type="submit">Add Cat</button>
+    </fieldset>
+</form>
