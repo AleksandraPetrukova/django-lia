@@ -18,10 +18,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
-import cats
+from cats import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", cats.views.index, name="cats"),
+    path("", views.index, name="cats"),
     path("cats/", include("cats.urls")),
 ]

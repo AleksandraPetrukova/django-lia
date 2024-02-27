@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 class Breed(models.Model):
     name = models.CharField(max_length=200)
@@ -9,7 +10,8 @@ class Breed(models.Model):
 
     def __str__(self):
         return self.name
-    
+
+
 class Cat(models.Model):
     name = models.CharField(max_length=200)
     breed = models.ForeignKey(Breed, on_delete=models.CASCADE)
