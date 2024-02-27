@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from cats.models import Breed, Cat
 from django.http import HttpResponse, Http404
 
@@ -33,3 +33,13 @@ def add_cat (request):
         new_cat = Cat(name=name, age=age, weight=weight, description=description, breed=breed)
         new_cat.save()
     return redirect('cats')
+
+def search_cat(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        # cats = Cat.objects.get(name__icontains=name)
+        try:
+            cat = Cat.objects.get(name=name)
+            return redirect('cat', cat_id=cat.id)
+        except Cat.DoesNotExist:
+            raise Http404("Cat matching query does not exist")

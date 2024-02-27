@@ -1,3 +1,9 @@
+<form method="post" action="{% url 'search_cat' %}">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Search for a cat">
+    <input type="submit" value="Search">
+</form>
+
 <ul>
     {% for cat in cats %}
         <li>
