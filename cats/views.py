@@ -35,11 +35,11 @@ def add_cat (request):
     return redirect('cats')
 
 def search_cat(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        # cats = Cat.objects.get(name__icontains=name)
+    if request.method == 'GET':
+        name = request.GET.get('name')
         try:
-            cat = Cat.objects.get(name=name)
+            cat = Cat.objects.get(name__icontains=name)
             return redirect('cat', cat_id=cat.id)
         except Cat.DoesNotExist:
             raise Http404("Cat matching query does not exist")
+    # return redirect('cats')
