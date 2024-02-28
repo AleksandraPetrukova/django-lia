@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from cats.models import Breed, Cat
-from django.http import HttpResponse, Http404
+from django.http import Http404, HttpResponseBadRequest
 
 
 # Create your views here.
@@ -43,4 +43,4 @@ def search_cat(request):
             return redirect("cat", cat_id=cat.id)
         except Cat.DoesNotExist:
             raise Http404("Cat matching query does not exist")
-    return redirect("cats")
+    return HttpResponseBadRequest("Invalid request method")
